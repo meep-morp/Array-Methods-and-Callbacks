@@ -49,14 +49,16 @@ function getWinners(cb, data) {
     cb(data).forEach(function(item) {
         if (item["Home Team Goals"] > item["Away Team Goals"]) {
             winners.push(item["Home Team Name"]);
-        } else {
+        } else if (item["Home Team Goals"] < item["Away Team Goals"]){
             winners.push(item["Away Team Name"]);
+        } else {
+            winners.push(item["Win conditions"].split(" ")[0]);
         }
     });
     return winners;
 };
 
-console.log(getWinners(getFinals,(fifaData)));
+console.log(getWinners(getFinals, fifaData));
 
 /* Task 6: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
@@ -65,24 +67,33 @@ Parameters:
  * callback function getYears
  */
 
-function getAllWinners(/* code here */) {
+function getAllWinners(winners, years, data) {
+    const winner = getWinners(getFinals, fifaData);
+    const year = getYears(getFinals, fifaData);
+    const allWinners = [];
 
-};
+    getFinals(data).forEach(function(item, i){
+    allWinners.push(`In ${year[i]}, ${winner[i]} won the world cup!`);
+    });
+    return allWinners;
 
-getAllWinners();
+}
+console.log(getAllWinners(getWinners, getYears, fifaData));
 
 /* Task 7: Create a function called `getCountryWins` that takes the parameters `data` and `team initials` and returns the number of world cup wins that country has had. 
 
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
-
-    /* code here */
-
+function getCountryWins(data, initials) {
+    
+    let count = data.reduce((n) => {
+        return n + (winners === initials || winners === initials);
+    }, 0);
+    return count;
 };
 
-getCountryWins();
+console.log(getCountryWins(fifaData, "GER"));
 
 
 /* Task 8: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
