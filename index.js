@@ -94,7 +94,7 @@ function getCountryWins(data, initials) {
     return count;
 };
 
-console.log(getCountryWins(fifaData, "ger"));
+console.log(getCountryWins(fifaData, "arg"));
 
 
 /* Task 8: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
@@ -137,8 +137,8 @@ console.log(getAverageGoals(fifaData));
 
 const worldCupAppearances = (data, int) => {
         let countApp = data.reduce((n, item) => {
-            return n + (item["Home Team Initials"] === int || item["Away Team Initials"] === int);
+            return n + (item["Home Team Initials"] === int.toUpperCase() || item["Away Team Initials"] === int.toUpperCase());
         }, 0);
     return countApp;
 }
-console.log(worldCupAppearances(fifaData, "BRA"))
+console.log(worldCupAppearances(fifaData, "arg"))
