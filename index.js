@@ -123,7 +123,6 @@ badDefense();
 
 function getAverageGoals(/* code here */) {
 
-    /* code here */
 
 };
 
@@ -133,3 +132,10 @@ getAverageGoals();
 /// STRETCH 🥅 //
 
 /* Use the space below to work on any stretch goals of your chosing as listed in the README file. */
+const worldCupAppearances = (data, int) => {
+    let countApp = data.reduce((n, item) => {
+        return n + (item["Home Team Initials"] === int || item["Away Team Initials"] === int);
+    }, 0);
+    return countApp;
+}
+console.log(worldCupAppearances(fifaData, "BRA"))
