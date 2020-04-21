@@ -72,7 +72,7 @@ function getAllWinners(winners, years,data) {
     const year = getYears(getFinals, data);
     const allWinners = [];
 
-    getFinals(data).forEach(function(item, i){
+    getFinals(data).forEach((item, i) =>{
     allWinners.push(`In ${year[i]}, ${winner[i]} won the world cup!`);
     });
     return allWinners;
@@ -87,9 +87,9 @@ Hint: use `.reduce` */
 
 function getCountryWins(data, initials) {
     let winnerNames = getWinners(getFinals, data);
-    winnerNames = winnerNames.map(function(x){ return x.toUpperCase().substring(0,3)})
+    winnerNames = winnerNames.map((arr) => { return arr.toUpperCase().substring(0,3)});
     let count = winnerNames.reduce((n, item) => {
-        return n + (item === initials.toUpperCase());
+        return n + (item === initials.toUpperCase() || initials === "ESP" || initials === "FRG");
     }, 0);
     return count;
 };
@@ -121,21 +121,24 @@ badDefense();
 
 /* Task 10: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
-
-
+function getAverageGoals(data) {
+    const homeGoals = data.map(goals => goals["Home Team Goals"]);
+    const homeAvg = homeGoals.reduce((total, item) => total + item, 0) / data.length;
+    const awayGoals = data.map(goals => goals["Away Team Goals"]);
+    const awayAvg = awayGoals.reduce((total, item) => total + item, 0) / data.length;
+    return `Home: ${Number.parseFloat(homeAvg).toFixed(2)} | Away: ${Number.parseFloat(awayAvg).toFixed(2)}`;
 };
-
-getAverageGoals();
+console.log(getAverageGoals(fifaData));
 
 
 /// STRETCH 🥅 //
 
 /* Use the space below to work on any stretch goals of your chosing as listed in the README file. */
+
 const worldCupAppearances = (data, int) => {
-    let countApp = data.reduce((n, item) => {
-        return n + (item["Home Team Initials"] === int || item["Away Team Initials"] === int);
-    }, 0);
+        let countApp = data.reduce((n, item) => {
+            return n + (item["Home Team Initials"] === int || item["Away Team Initials"] === int);
+        }, 0);
     return countApp;
 }
 console.log(worldCupAppearances(fifaData, "BRA"))

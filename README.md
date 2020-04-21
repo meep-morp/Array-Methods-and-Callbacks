@@ -63,7 +63,7 @@ You may want to use the [World Cup summary data](https://www.foxsports.com/socce
 
 ### Task 3: Stretch Goals
 
-After you have completed the requirements, create a new file called `stretch.js` and practice with Array methods more.
+After you have completed the requirements, practice with Array methods more.
 
 See if you can complete one or more of the following challenges:
 
