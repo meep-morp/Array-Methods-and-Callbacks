@@ -87,14 +87,14 @@ Hint: use `.reduce` */
 
 function getCountryWins(data, initials) {
     let winnerNames = getWinners(getFinals, data);
-    winnerNames = winnerNames.map((arr) => { return arr.toUpperCase().substring(0,3)});
+    winnerNames = winnerNames.map((arr) => { return arr.replace("Spain", "ESP").replace("Germany FR","FRG").toUpperCase().substring(0,3)});
     let count = winnerNames.reduce((n, item) => {
-        return n + (item === initials.toUpperCase() || initials === "ESP" || initials === "FRG");
+        return n + (item === initials.toUpperCase());
     }, 0);
     return count;
 };
 
-console.log(getCountryWins(fifaData, "arg"));
+console.log(getCountryWins(fifaData, "ger"));
 
 
 /* Task 8: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
